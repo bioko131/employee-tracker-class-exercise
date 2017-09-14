@@ -9,6 +9,8 @@
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
+  <link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
 
 <body>
@@ -98,7 +100,76 @@
 
   </div>
 
- 
+ <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+
+  <!-- LINK TO FIREBASE GOES HERE -->
+  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+
+  <!-- Script -->
+  <script>
+    //  START CODING BELOW!!
+
+    // Initialize Firebase
+    var config = {
+    apiKey: "AIzaSyCdjUzw8e0HLZzZ5ocpIx4JsCPjRn9B2a4",
+    authDomain: "firstproject-7a58e.firebaseapp.com",
+    databaseURL: "https://firstproject-7a58e.firebaseio.com",
+    projectId: "firstproject-7a58e",
+    storageBucket: "firstproject-7a58e.appspot.com",
+    messagingSenderId: "236221171155"
+    };
+
+    firebase.initializeApp(config);
+
+    // Create a variable to reference the database
+
+    var database = firebase.database();
+    var name = "";
+    var role = "";
+    var startDate = "";
+    var rate = "";
+
+
+    // Capture Button Click
+    $("#add-user").on("click", function() {
+      // Don't refresh the page!
+      event.preventDefault();
+
+
+      // YOUR TASK!!!
+      database.ref().push({
+        name: $("#employee-input-input").val().trim(),
+        role: $("#role-input-input").val().trim(),
+        startDate: $("#date-input").val().trim(),
+        rate: $("#date-input").val().trim()
+
+      });
+
+      // Code in the logic for storing and retrieving the most recent user.
+
+      // Don't forget to handle the "initial load"
+
+    });
+
+
+    // Create Firebase "watcher" Hint: .on("value")
+    database.ref().on("value", function(snapshot){
+
+      console.log(snapshot.val());
+      console.log(snapshot.val().name);
+      console.log(snapshot.val().age);
+      console.log(snapshot.val().email);
+
+      $("#name-display").text("Name: " + $("#name-input").val().trim())
+      $("#email-display").text("Email: " + $("#email-input").val().trim())
+      $("#age-display").text("Age: " + $("#age-input").val().trim())
+
+    });
+
+
+    // Create Error Handling
+  </script>
 
 </body>
 
